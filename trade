@@ -1,0 +1,28 @@
+from collections import Counter
+
+def direcao_operacao(velas):
+    """
+    velas: lista com as 5 últimas velas, cada uma sendo 'verde' ou 'vermelha'
+    retorna: 'compra' se a maioria for vermelha,
+             'venda' se a maioria for verde,
+             'neutro' se houver empate
+    """
+    if len(velas) != 5:
+        raise ValueError("É preciso passar exatamente 5 velas")
+
+    contagem = Counter(velas)
+    verdes = contagem['verde']
+    vermelhas = contagem['vermelha']
+
+    if verdes > vermelhas:
+        return "venda"      # mais verdes → vender
+    elif vermelhas > verdes:
+        return "compra"     # mais vermelhas → comprar
+    else:
+        return "neutro"     # empate, sem operação
+
+# Exemplo de teste
+if __name__ == "__main__":
+    velas_teste = ['verde', 'verde', 'vermelha', 'verde', 'vermelha']
+    print("Velas:", velas_teste)
+    print("Sinal de entrada:", direcao_operacao(velas_teste))
